@@ -1,0 +1,47 @@
+body
+{
+    	display: table;
+   	margin: auto;
+    	overflow-x:hidden;
+    	overflow-y:hidden;
+	background-color: coral;
+}
+
+textarea
+{
+	width: 100vw;
+	height: 50vh;
+	background-color: #EEEEEE;
+}
+
+.input
+{
+	width: 100vw;
+}
+
+.input-button
+{
+	width: 100vw;
+}
+
+@media only screen and (min-width: 400px) {
+
+textarea
+{
+	width: 400px;
+	height: 50vh;
+}
+
+.input
+{
+	margin-left: 4px;
+	width: 77%;
+}
+
+.input-button
+{
+	display: inline;
+	width: 20%;
+}
+
+}
