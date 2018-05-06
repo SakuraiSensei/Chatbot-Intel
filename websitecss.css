@@ -20,6 +20,10 @@ body
     border-right: 50px solid #58a5e8;
 }
 
+.intel {
+    border-right: 50px solid #80c0f7;
+}
+
 input:hover {
     background-color: #3987C9;
     cursor: pointer;
