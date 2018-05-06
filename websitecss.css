@@ -1,4 +1,14 @@
-button {
+body
+{
+
+	font-family: Arial, Helvetica, sans-serif;
+
+	font-size: 90%;
+	overflow-x: hidden;
+}
+
+
+.button {
     background-color: #4CAF50; /* Green */
     border: none;
     color: white;
@@ -7,4 +17,36 @@ button {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    border-right: 50px solid #58a5e8;
+}
+
+input:hover {
+    background-color: #3987C9;
+    cursor: pointer;
+}
+
+.aut {
+	padding-right: 100px;
+}
+
+img {
+	padding-right: 10px;
+}
+
+
+@media only screen and (max-width: 900px) {
+
+.no-mobile1 {
+	display: none;
+}
+
+}
+
+
+@media only screen and (max-width: 1400px) {
+
+.no-mobile2 {
+	display: none;
+}
+
 }
