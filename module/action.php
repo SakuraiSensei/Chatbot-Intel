@@ -11,7 +11,7 @@ ChatBot Intel: Hello. How can I help you?
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && htmlspecialchars($_GET['messanger']) != null) {
 	echo "<form action=\"chatform.php\" method=\"get\">";
 	echo "<input class=\"input\" name=\"messanger\" type=\"text\" readonly>";
-	echo "<input class=\"input-button\" value=\"Submit\" type=\"submit\" readonly>";
+	echo "<input class=\"input-button\" value=\"Submit\" type=\"submit\" disabled>";
 }
 else
 {
