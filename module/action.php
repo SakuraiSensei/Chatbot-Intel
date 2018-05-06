@@ -3,7 +3,7 @@ ChatBot Intel: Hello. How can I help you?
 <?php
 	if ($_SERVER['REQUEST_METHOD'] === 'GET' && htmlspecialchars($_GET['messanger']) != null) {
 		echo 'You: '. htmlspecialchars($_GET['messanger']);
-		echo '&#13;&#10;ChatBot Intel: '. 'You cannot type anymore. hehe. use cookie btw.';
+		echo '&#13;&#10;ChatBot Intel: '. 'Thank you for your cooperation. cookie.';
 	}
 ?>
 </textarea>
