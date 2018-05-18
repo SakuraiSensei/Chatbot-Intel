@@ -25,12 +25,12 @@ while(true)
 }
 
 use Phpml\Classification\MLPClassifier;
+use Phpml\NeuralNetwork\ActivationFunction\Gaussian;
 use Phpml\NeuralNetwork\ActivationFunction\PReLU;
-use Phpml\NeuralNetwork\ActivationFunction\BinaryStep;
+use Phpml\NeuralNetwork\ActivationFunction\Sigmoid;
 use Phpml\ModelManager;
 
-//$mlp = new MLPClassifier(1, [[2, new PReLU],[2, new BinaryStep]], $array);
-$mlp = new MLPClassifier(1, [50], $array, 1000);
+$mlp = new MLPClassifier(4, [[3, new PReLU],[3, new Gaussian],[3, new Sigmoid]], $array);
 
 $arrayInput = ['I am not sure.'];
 $arrayOutput = ['I am not sure.'];
@@ -80,7 +80,7 @@ while(strlen($datacopy) > 1)
 //$arrayInput
 //$arrayOutput
 
-$ArrayInputSuper = [0];
+$ArrayInputSuper = [-1];
 $ArrayInputHyperSuper = [$ArrayInputSuper];
 
 //GOGOGOGO
@@ -88,7 +88,52 @@ for($gogo = 1; $gogo < sizeof($arrayInput); $gogo++)
 {
 	$receivedString = htmlspecialchars($arrayInput[$gogo]);
 
-	$receivedString = str_replace("what", "", $receivedString);
+	$arr = str_split(strtolower($receivedString));
+	$length = strlen($receivedString);
+
+	$x = -1;
+
+	$node1 = 0;
+	$node2 = 0;
+	$node3 = 0;
+	$node4 = 0;
+
+	while($x++ < $length-1)
+	{
+		//Sum of all characters and numbers (typo error will be solved automatically)
+		//a to z and 0 to 9.
+		if('a' <= $arr[$x] && $arr[$x] <= 'z')
+		{
+			$looper = ord($arr[$x])-96;
+			$loopSum = 1;
+			$y = -1;
+
+			while($y++ < $looper-2)
+			{
+				$loopSum = $loopSum * 10;
+			}
+			
+			$node1 += $loopSum;
+		}
+		else if('0' <= $arr[$x] && $arr[$x] <= '9')
+		{
+			$looper = ord($arr[$x])-21;
+			$loopSum = 1;
+			$y = -1;
+
+			while($y++ < $looper-2)
+			{
+				$loopSum = $loopSum * 10;
+			}
+			
+			$node1 += $loopSum;
+		}
+	}
+
+	//length of string
+	$node2 = $length;
+
+	$receivedString = str_replace("what", "", strtolower($receivedString));
 	$receivedString = str_replace("why", "", $receivedString);
 	$receivedString = str_replace("how", "", $receivedString);
 	$receivedString = str_replace("is", "", $receivedString);
@@ -102,16 +147,10 @@ for($gogo = 1; $gogo < sizeof($arrayInput); $gogo++)
 	$receivedString = str_replace("would", "", $receivedString);
 	$receivedString = str_replace("could", "", $receivedString);
 	$receivedString = str_replace("can", "", $receivedString);
-	$receivedString = str_replace(" ", "", $receivedString);
+	$arr = str_split($receivedString);
+	$x = 0;
 
-	$arr = str_split(strtolower($receivedString));
-	$length = strlen($receivedString);
-
-	$x = -1;
-
-	$node = [0];
-
-	while($x++ < 9)
+	while($x++ < $length-1)
 	{
 		//Sum of all characters and numbers (typo error will be solved automatically)
 		//a to z and 0 to 9.
@@ -123,10 +162,10 @@ for($gogo = 1; $gogo < sizeof($arrayInput); $gogo++)
 
 			while($y++ < $looper-2)
 			{
-				$loopSum = $loopSum + 1;
+				$loopSum = $loopSum * 10;
 			}
 			
-			$node[0] += $loopSum;
+			$node3 += $loopSum;
 		}
 		else if('0' <= $arr[$x] && $arr[$x] <= '9')
 		{
@@ -136,43 +175,37 @@ for($gogo = 1; $gogo < sizeof($arrayInput); $gogo++)
 
 			while($y++ < $looper-2)
 			{
-				$loopSum = $loopSum + 1;
+				$loopSum = $loopSum * 10;
 			}
 			
-			$node[0] += $loopSum;
+			$node3 += $loopSum;
 		}
 	}
 
-$ArrayInputSuper = $node;
+	$length = strlen($receivedString);
+	$node4 = $length;
+
+$ArrayInputSuper = [$node1,$node2,$node3,$node4];
 
 //ENDENDEND
 
 array_push($ArrayInputHyperSuper, $ArrayInputSuper);
 }
 
-echo sizeof($ArrayInputHyperSuper);
-echo sizeof($arrayOutput);
+//echo sizeof($ArrayInputHyperSuper);
+//echo sizeof($arrayOutput);
 
-echo print_r($ArrayInputHyperSuper);
-
-$mlp->setLearningRate(0.1);
-
-$mlp->partialTrain(
+$mlp->train(
     $samples = $ArrayInputHyperSuper,
     $targets = $arrayOutput
 );
-
-$mlp->setLearningRate(0.1);
 
 $tempPrint2 = $mlp->predict($ArrayInputHyperSuper);
 
 echo print_r($tempPrint2);
 
-$tempPrint2 = $mlp->predict([[0]]);
-
-echo print_r($tempPrint2);
 $filepath = './save';
 $modelManager = new ModelManager();
 $modelManager->saveToFile($mlp, $filepath);
 ?>
-DONES
+DONE

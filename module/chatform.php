@@ -4,7 +4,7 @@
 <title>ChatBot Intel</title>
 </head>
 <body>
-<?php include 'action.php';?>
+<?php include './../action.php';?>
 <a href="./../index.html">Back</a>
 </body>
 </html>

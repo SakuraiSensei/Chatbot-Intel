@@ -1,6 +1,5 @@
 <textarea readonly>
 <?php
-session_start();
 
 require_once __DIR__ . '/phpml/vendor/autoload.php';
 
@@ -125,46 +124,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && htmlspecialchars($_GET['messanger'])
 	$length = strlen($receivedString);
 	$node4 = $length;
 
-	$output = htmlspecialchars($_GET['output']);
-
-	$filepath = './save';
+	$filepath = './saved';
 
 	$modelManager = new ModelManager();
 	$restoredClassifier = $modelManager->restoreFromFile($filepath);
 	$mlp = $restoredClassifier;
 
-	$mlp->partialTrain(
-    		$samples = [[$node1,$node2,$node3,$node4]],
-    		$targets = [$output]
-	);
+	$tempPrint2 = $mlp->predict([[$node1,$node2,$node3,$node4]]);
+	echo $tempPrint1;
+	echo "&#13;&#10;ChatBot Intel: " . $tempPrint2[0];
 
-	$modelManager = new ModelManager();
-	$modelManager->saveToFile($mlp, $filepath);
+	$temp = $tempPrint1 . "&#13;&#10;ChatBot Intel: " . $tempPrint2[0];
 
 	/*
-	$tempPrint2 = $mlp->predict([[$node1,$node2,$node3,$node4]]);
-	echo $tempPrint1 . $node1 . ' ' . $node2 . ' ' . $node3 . ' ' . $node4;
-	echo "&#13;&#10;ChatBot Intel: " . $tempPrint2[0] . " (...PREDICTION FOR TRAINING PURPOSE...)";
-
 	if($temp == null)
 	{
 		$temp = $_COOKIE["chatBotIntel"];
-		setcookie("chatBotIntel", $temp . $tempPrint1 . "&#13;&#10;ChatBot Intel: " . $tempPrint2[0] . " (...PREDICTION FOR TRAINING PURPOSE...)");
+		setcookie("chatBotIntel", $temp . $tempPrint1 . "&#13;&#10;ChatBot Intel: " . $tempPrint2[0]);
 	}
 	else
 	{
-		setcookie("chatBotIntel", $temp . $tempPrint1 . "&#13;&#10;ChatBot Intel: " . $tempPrint2[0] . " (...PREDICTION FOR TRAINING PURPOSE...)");
+		setcookie("chatBotIntel", $temp . $tempPrint1 . "&#13;&#10;ChatBot Intel: " . $tempPrint2[0]);
 	}
 	*/
 }
+
 ?>
 </textarea>
 <?php
-	echo "<form action=\"chatformadmin.php\" method=\"get\">";
-	echo "INPUT :::: ";
+	echo "<form action=\"chatform.php\" method=\"get\">";
 	echo "<input class=\"input\" name=\"messanger\" type=\"text\">";
-	echo "<BR>OUTPUT: ";
-	echo "<input class=\"input\" name=\"output\" type=\"text\">";
 	echo "<input class=\"input-button\" value=\"Submit\" type=\"submit\">";
 ?>
 </form>

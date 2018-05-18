@@ -25,12 +25,12 @@ while(true)
 }
 
 use Phpml\Classification\MLPClassifier;
+use Phpml\NeuralNetwork\ActivationFunction\Gaussian;
 use Phpml\NeuralNetwork\ActivationFunction\PReLU;
-use Phpml\NeuralNetwork\ActivationFunction\BinaryStep;
+use Phpml\NeuralNetwork\ActivationFunction\Sigmoid;
 use Phpml\ModelManager;
 
-//$mlp = new MLPClassifier(1, [[2, new PReLU],[2, new BinaryStep]], $array);
-$mlp = new MLPClassifier(1, [50], $array, 1000);
+$mlp = new MLPClassifier(10, [[3, new PReLU],[3, new Gaussian],[3, new Sigmoid]], $array);
 
 $arrayInput = ['I am not sure.'];
 $arrayOutput = ['I am not sure.'];
@@ -80,7 +80,7 @@ while(strlen($datacopy) > 1)
 //$arrayInput
 //$arrayOutput
 
-$ArrayInputSuper = [0];
+$ArrayInputSuper = [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1];
 $ArrayInputHyperSuper = [$ArrayInputSuper];
 
 //GOGOGOGO
@@ -109,9 +109,9 @@ for($gogo = 1; $gogo < sizeof($arrayInput); $gogo++)
 
 	$x = -1;
 
-	$node = [0];
+	$node = [0,0,0,0,0,0,0,0,0,0];
 
-	while($x++ < 9)
+	while($x++ < 11)
 	{
 		//Sum of all characters and numbers (typo error will be solved automatically)
 		//a to z and 0 to 9.
@@ -123,10 +123,10 @@ for($gogo = 1; $gogo < sizeof($arrayInput); $gogo++)
 
 			while($y++ < $looper-2)
 			{
-				$loopSum = $loopSum + 1;
+				$loopSum = $loopSum * 123;
 			}
 			
-			$node[0] += $loopSum;
+			$node[$x] += $loopSum;
 		}
 		else if('0' <= $arr[$x] && $arr[$x] <= '9')
 		{
@@ -136,10 +136,10 @@ for($gogo = 1; $gogo < sizeof($arrayInput); $gogo++)
 
 			while($y++ < $looper-2)
 			{
-				$loopSum = $loopSum + 1;
+				$loopSum = $loopSum * 123;
 			}
 			
-			$node[0] += $loopSum;
+			$node[$x] += $loopSum;
 		}
 	}
 
@@ -155,23 +155,16 @@ echo sizeof($arrayOutput);
 
 echo print_r($ArrayInputHyperSuper);
 
-$mlp->setLearningRate(0.1);
-
-$mlp->partialTrain(
+$mlp->train(
     $samples = $ArrayInputHyperSuper,
     $targets = $arrayOutput
 );
-
-$mlp->setLearningRate(0.1);
 
 $tempPrint2 = $mlp->predict($ArrayInputHyperSuper);
 
 echo print_r($tempPrint2);
 
-$tempPrint2 = $mlp->predict([[0]]);
-
-echo print_r($tempPrint2);
-$filepath = './save';
+$filepath = './saves';
 $modelManager = new ModelManager();
 $modelManager->saveToFile($mlp, $filepath);
 ?>
