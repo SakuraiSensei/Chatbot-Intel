@@ -13,14 +13,7 @@ body
    	margin: auto;
     	overflow-x:hidden;
     	overflow-y:hidden;
-	background-color: coral;
-}
-
-textarea
-{
-	width: 100vw;
-	height: 50vh;
-	background-color: #EEEEEE;
+	background-color: white;
 }
 
 .input
@@ -34,12 +27,6 @@ textarea
 }
 
 @media only screen and (min-width: 800px) {
-
-textarea
-{
-	width: 800px;
-	height: 80vh;
-}
 
 .input
 {
