@@ -159,7 +159,7 @@ AWS.config.credentials = new AWS.CognitoIdentityCredentials({
 <P>
 Questions can be... <BR><BR>
 What are the pre-requisites and co-requisites for [a specific paper]? <BR>
-If I take a <specific paper>  what other papers should I take next for [the software dev major in the BCIS]? <BR>
+If I take a [specific paper] what other papers should I take next for [the software dev major in the BCIS]? <BR>
 What would be a suggested set of papers for a [the software dev major in the BCIS]? <BR>
 Which papers are suitable for a [specific job] (like web developer, business analyst, software engineer, scrum master)? <BR>
 If I have failed [specific paper] what papers can I still take? <BR>
