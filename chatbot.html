@@ -209,7 +209,41 @@ AWS.config.credentials = new AWS.CognitoIdentityCredentials({
         var responsePara = document.createElement("P");
         responsePara.className = 'lexResponse';
         if (lexResponse.message) {
-            responsePara.appendChild(document.createTextNode(lexResponse.message));
+	    var x = lexResponse.message;
+
+            var i;
+            var text = "";
+            for (i = 0; i < x.length; i++) {
+
+		if(x.substring(0,1) == ";")
+		{
+            	   responsePara.appendChild(document.createTextNode(text));
+            	   responsePara.appendChild(document.createElement('br'));
+		   text = "";
+		   x = x.substring(1);
+		   i--;
+		   continue;
+		}
+		else if(x.substring(0,1) == "|")
+		{
+		   var xx = document.createElement('b');
+		   var tt = document.createTextNode(text);
+		   xx.appendChild(tt);
+            	   responsePara.appendChild(document.body.appendChild(xx));
+
+		   text = "";
+		   x = x.substring(1);
+		   i--;
+		   continue;
+		}
+
+                text += x.substring(0,1);
+		x = x.substring(1);
+		i--;
+
+	    } 
+
+            responsePara.appendChild(document.createTextNode(text));
             responsePara.appendChild(document.createElement('br'));
         }
         if (lexResponse.dialogState === 'ReadyForFulfillment') {
