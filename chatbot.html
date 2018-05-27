@@ -41,7 +41,7 @@
 
 .text {
 		float: center;
-		padding: 40px;
+		padding: 2px;
 		background-color: #cc00cc;
 		margin: 40px 80px;
 
@@ -57,7 +57,7 @@
 input#wisdom {
             padding: 4px;
             font-size: 1em;
-            width: 400px
+            width: 726px
         }
     input::placeholder {
         color: #ccc;
@@ -121,9 +121,9 @@ input#wisdom {
 </div>
 <div class = "text">
 
-<h1 style="text-align: left">ChatBot Intel - AUT Paper searcher</h1>
+<h3>ChatBot Intel - AUT Paper searcher</h3>
 
-    <div id="conversation" style="width: 400px; height: 400px; border: 1px solid #ccc; background-color: #eee; padding: 4px; overflow: scroll"></div>
+    <div id="conversation" style="width: 726px; height: 350px; border: 1px solid #ccc; background-color: #eee; padding: 4px; overflow: scroll"></div>
     <form id="chatform" style="margin-top: 10px" onsubmit="return pushChat();">
         <input type="text" id="wisdom" size="80" value="" placeholder="Type your question">
     </form>
@@ -227,15 +227,15 @@ AWS.config.credentials = new AWS.CognitoIdentityCredentials({
         conversationDiv.scrollTop = conversationDiv.scrollHeight;
     }
 </script>
-<P>
-Questions can be... <BR><BR>
-What are the pre-requisites and co-requisites for [a specific paper]? <BR>
-If I take a [specific paper] what other papers should I take next for [the software dev major in the BCIS]? <BR>
-What would be a suggested set of papers for a [the software dev major in the BCIS]? <BR>
-Which papers are suitable for a [specific job] (like web developer, business analyst, software engineer, scrum master)? <BR>
-If I have failed [specific paper] what papers can I still take? <BR>
-What semesters is [specific paper] offered in [specific year]? <BR>
-</P>
+<div class = "text">
+<b>Questions can be...</b> <BR><BR>
+What are the pre-requisites and co-requisites for <i>[specific paper]</i>? <BR>
+If I take <i>[specific paper]</i> what other papers should I take next for <i>[the software dev major in the BCIS]</i>? <BR>
+What would be a suggested set of papers for a <i>[the software dev major in the BCIS]</i>? <BR>
+Which papers are suitable for a <i>[specific job]</i> (like web developer, business analyst, software engineer, scrum master)? <BR>
+If I have failed <i>[specific paper]</i> what papers can I still take? <BR>
+What semesters is <i>[specific paper]</i> offered in <i>[specific year]</i>? <BR>
+</div>
 
 </div>
 

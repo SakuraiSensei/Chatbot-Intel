@@ -31,10 +31,7 @@ body
     border-right: 50px solid #80c0f7;
 }
 
-input:hover {
-    background-color: #3987C9;
-    cursor: pointer;
-}
+
 
 .aut {
 	padding-right: 100px;
